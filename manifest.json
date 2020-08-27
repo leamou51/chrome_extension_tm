@@ -1,0 +1,22 @@
+{
+  "name": "Le wagon chrome extension",
+  "version": "1.0",
+  "description": "Build an Extension!",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/grandmother.png"
+  },
+  "icons": {
+    "16": "images/grandmother.png",
+    "32": "images/grandmother.png",
+    "48": "images/grandmother.png",
+    "128": "images/grandmother.png"
+  }
+}
