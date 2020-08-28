@@ -1,25 +1,24 @@
-// chrome.pageAction.onClicked.addListener(function(tab) {
-//     chrome.storage.local.get("state", function(result)
-//     {
-//         //First initialisation of the state in the local storage
-//         if(result.state == null)
-//         {
-//             chrome.storage.local.set({state: 0});
-//             state0Actions(); //Do what you want
-//         }
-//         else if (result.state == 0) {
-//             result.state = 1;
-//             state0Actions(); //Do what you want
-//         }
-//         else {
-//             result.state = 0;
-//             state1Actions(); //Do what you want
-//         }
+chrome.browserAction.onClicked.addListener(function(tab) {
+  let domain = null;
 
-//         //Save the new state to the storage
-//         chrome.storage.set({state: result.state});
-//     })
-// });
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    var tab = tabs[0];
+    var url = new URL(tab.url);
+    domain = url.hostname;
+
+    if (domain == 'wwwd.caf.fr') {
+      sessionStorage.setItem(domain, 1);
+
+    } else {
+      sessionStorage.setItem(domain, 0);
+    }
+  })
+
+});
+
+if ( sessionStorage.getItem('wwwd.caf.fr') == 1 ) {
+    chrome.tabs.executeScript({ file: 'content_script.js' });
+  }
 
 // --------------
 // Germain's Tuto
