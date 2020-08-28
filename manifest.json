@@ -1,5 +1,5 @@
 {
-  "name": "Le wagon chrome extension",
+  "name": "Tata Monique Chrome Extension",
   "version": "1.0",
   "description": "Build an Extension!",
   "manifest_version": 2,
@@ -7,7 +7,8 @@
     "scripts": ["background.js"]
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "browser_action": {
     "default_popup": "popup.html",
@@ -18,5 +19,42 @@
     "32": "images/grandmother.png",
     "48": "images/grandmother.png",
     "128": "images/grandmother.png"
-  }
+  },
+  "content_scripts" :
+  [
+    {
+      "matches": ["https://wwwd.caf.fr/*","http://wwwd.caf.fr/*"],
+        "all_frames": true,
+      "js": ["content_script.js"]
+    }
+  ]
 }
+
+
+
+// --------------
+// Germain's Tuto
+// --------------
+
+// {
+//   "name": "Le wagon chrome extension",
+//   "version": "1.0",
+//   "description": "Build an Extension!",
+//   "manifest_version": 2,
+//   "background": {
+//     "scripts": ["background.js"]
+//   },
+//   "permissions": [
+//     "activeTab"
+//   ],
+//   "browser_action": {
+//     "default_popup": "popup.html",
+//     "default_icon": "images/grandmother.png"
+//   },
+//   "icons": {
+//     "16": "images/grandmother.png",
+//     "32": "images/grandmother.png",
+//     "48": "images/grandmother.png",
+//     "128": "images/grandmother.png"
+//   }
+// }
