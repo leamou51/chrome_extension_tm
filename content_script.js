@@ -64,7 +64,9 @@ const urlFirstPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesse
 
 const urlSecondPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDBbkX6R6a92VxWP3msvcGivDp6g!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
 
-const urlThirdPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1'
+const urlThirdPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDBbkX6R6a92VxWP3msvcGivDp6g!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
+
+
 
 const urlFourthPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/hZDNDoIwEISfyHTLn3BEkVKrgBIicCGNAdMIxSDx-S0JMfEA7G2Tb2ZnFhUoQ4XkH_Hgg-gkb8a9sMo4wiRgCZDIO9tAU08H_3DF4IICcgXAzChg1FuBQbDDgBHm-ODSMGHGDnSItUm_AKzcv6HiH7H9vQ_UMT0vvFAVQV8DYAKWOqy1yFWL7SxgGiiVXd-qfyajV923z73ktXsfv4zyvhJSDII34l31k9cvLrCTqoy16OgSrAPB6NWmGQi6yduSfgHdskix/dl5/d5/L2dBISEvZ0FBIS9nQSEh'
 
@@ -130,6 +132,25 @@ function autoCompleteFormThirdPart() {
 
 function autoCompleteFormFourthPart() {
 
+  if (document.querySelector('#Locataire') != null) {
+    if (userObj.habitation.category.toLowerCase() != "propriétaire") {
+    const rent = document.querySelector('#Locataire');
+    rent.checked = true;
+    rent.click (function() { this.click(); });
+    }
+
+    document.querySelectorAll('.width9').forEach((classRadio) => { classRadio.style.border = '3px solid red'
+    });
+  }
+
+  if(document.querySelector('#conditionAcces') != null) {
+    document.querySelector('#conditionAcces').click (function() { this.click(); });
+    document.querySelector('#BCCommencer').click();
+  }
+
+  if(document.querySelector('.fieldset-apparent') != null) {
+    document.querySelector('#BCContinuer').click();
+  }
 }
 
 // ---------------------------
@@ -151,6 +172,11 @@ function actions() {
   if(window.location.href.includes(urlThirdPage)) {
     console.log('url3');
     autoCompleteFormThirdPart();
+  }
+
+  if(window.location.href.includes(urlFourthPage)) {
+    console.log('url4');
+    autoCompleteFormFourthPart();
   }
 }
 
