@@ -1,31 +1,53 @@
+// clear le state quand le user arrive sur le formulaire
+chrome.webNavigation.onBeforeNavigate.addListener(function() {
+    alert("Clique sur Tata Monique pour qu'elle te donne un coup de pouce 😉");
+    chrome.storage.local.clear();
+  }, {url: [{urlEquals : 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogementexperimentation/!ut/p/a0'}]});
+
 chrome.browserAction.onClicked.addListener(function(tab) {
-  let domain = null;
 
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     var tab = tabs[0];
-    var url = new URL(tab.url);
-    domain = url.hostname;
+    var url = new URL(tab.url)
+    var domain = url.hostname
+
+    // initialise le state à 1 si le user est sur la CAF, 0 sinon
+
+    console.log('initialise state');
 
     if (domain == 'wwwd.caf.fr') {
-      sessionStorage.setItem(domain, 1);
+      chrome.storage.local.set( {state: 1}, function() {
+      console.log("state = 1") // OK
 
+      // run content script pour la première page du formulaire
+      chrome.tabs.executeScript ( {file: './content_script.js'} );
+
+      });
     } else {
-      sessionStorage.setItem(domain, 0);
+      chrome.storage.local.set( {state: 0}, function() {
+      console.log("state = 0") // OK
+      });
     }
+
   })
 
 });
 
-if ( sessionStorage.getItem('wwwd.caf.fr') == 1 ) {
-    chrome.tabs.executeScript({ file: 'content_script.js' });
-  }
 
-// --------------
-// Germain's Tuto
-// --------------
+// à chaque fois qu'une nouvelle page se charge, run content script si state = 1
+chrome.webNavigation.onCompleted.addListener(function() {
+  console.log('page loaded');
 
-// chrome.browserAction.onClicked.addListener((tab) => {
-// chrome.tabs.executeScript({
-//   code: 'document.body.style.backgroundColor="#C3413B"'
-// });
-// });
+  chrome.storage.local.get(['state'], function(result) {
+  console.log(result.state);
+
+    if (result.state == 1) {
+      console.log('run content_script');
+      chrome.tabs.executeScript ( {file: './content_script.js'} );
+    } else {
+      console.log('do nothing');
+    }
+
+  });
+
+});
