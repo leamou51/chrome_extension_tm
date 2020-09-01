@@ -1,6 +1,23 @@
+
+
 // clear le state quand le user arrive sur le formulaire
-chrome.webNavigation.onBeforeNavigate.addListener(function() {
-    alert("Clique sur Tata Monique pour qu'elle te donne un coup de pouce 😉");
+chrome.webNavigation.onCompleted.addListener(function() {
+
+  var tataMoniqueNotification = "tata-monique-notification"
+
+  chrome.alarms.create("", {periodInMinutes: 0.1});
+
+  chrome.notifications.clear(tataMoniqueNotification);
+
+  chrome.notifications.create(tataMoniqueNotification, {
+    "type": "basic",
+    "iconUrl": "./images/grandmother.png",
+    "title": "Besoin d'un coup de pouce ?!",
+    "message": "Clique sur l'extension Tata Monique 😉"
+  });
+
+  // chrome.browserAction.setPopup({ popup: 'popup.html' })
+
     chrome.storage.local.clear();
   }, {url: [{urlEquals : 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogementexperimentation/!ut/p/a0'}]});
 
