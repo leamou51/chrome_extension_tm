@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/v1/users/3'
+const apiUrl = 'http://localhost:3000/api/v1/users/4'
 let userObj = null
 
 function fetchUserData () {
@@ -62,9 +62,11 @@ fetchUserData();
 
 const urlFirstPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogementexperimentation/!ut/p/a0#/acces'
 
-const urlSecondPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDBbkX6R6a92VxWP3msvcGivDp6g!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
+const urlSecondPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDfHIv0j0078visPrNZe8NP2gIxQ!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
 
-const urlThirdPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDBbkX6R6a92VxWP3msvcGivDp6g!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
+
+
+const urlThirdPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDfHIv0j0078visPrNZe8NP2gIxQ!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
 
 
 
@@ -90,7 +92,7 @@ function autoCompleteFormFirstPart() {
   setTimeout(function(){
     document.querySelector(".uib-typeahead-match").click();
     document.querySelector(".boutondalprimo").click();
-  }, 100);
+  }, 150);
 }
 
 function autoCompleteFormSecondPart() {
@@ -145,7 +147,6 @@ function autoCompleteFormThirdPart() {
 }
 
 function autoCompleteFormFourthPart() {
-  var event = new Event('change');
   // check webpage "Type de logement"
   if (document.querySelector('#Locataire') != null) {
     console.log(1);
@@ -191,6 +192,9 @@ function autoCompleteFormFourthPart() {
   // check webpage "Etat civil"
   if (document.querySelector('.cell.width15.paddingtop1') != null && document.querySelector('.message-alerte')) {
     console.log(5);
+
+    var event = new Event('change');
+
     // check the user's sex
     if (userObj.health.ssn.charAt(0) == "1") {
       document.querySelectorAll('.borneBoutons')[1].click();
@@ -287,11 +291,16 @@ function autoCompleteFormFourthPart() {
     setTimeout(function() { document.querySelector('#BCContinuer').click()}, 50);
   }
 
+  // check webpage "Adresse"
   if (document.querySelector('#dfOccLog') != null) {
     console.log(10);
+
+    var event = document.createEvent('Event');
+    event.initEvent('input', true, true);
+
     // enter "N° et voie"
     const address = document.querySelector('#LIBLIG4ADR');
-    address.value = `${userObj.habitation.number} ${userObj.habitation.street}`
+    address.value = `${userObj.habitation.number} ${userObj.habitation.street.toUpperCase()}`
     address.dispatchEvent(event);
 
     // enter zip code and city
@@ -299,8 +308,59 @@ function autoCompleteFormFourthPart() {
     zipCode.value = `${userObj.habitation.zip_code} ${userObj.habitation.city.toUpperCase()}`
     zipCode.dispatchEvent(event);
 
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector('#BCContinuer').click()}, 50);
   }
 
+  // check webpage "Coordonnées de contact"
+  if (document.querySelector("input[name='numTelDos']") != null) {
+    console.log(11);
+    // click on "Continuer" button
+    // by default no phone number provided
+    setTimeout(function() { document.querySelector('#BCContinuer').click()}, 50);
+  }
+
+  // check webpage "Coordonnées bancaires"
+  if (document.querySelector('#CTNIBAN1') != null) {
+    console.log(12);
+    const fakeIban = 'FR7630004000031234567890143';
+    const fakeBIC = 'BNPAFRPPXXX';
+    const fakeDom = 'PARIS'
+    // enter IBAN
+    const iban1 = document.querySelector("input[name='tniban1']");
+    const iban2 = document.querySelector("input[name='tniban2']");
+    const iban3 = document.querySelector("input[name='tniban3']");
+    const iban4 = document.querySelector("input[name='tniban4']");
+    const iban5 = document.querySelector("input[name='tniban5']");
+    const iban6 = document.querySelector("input[name='tniban6']");
+    const iban7 = document.querySelector("input[name='tniban7']");
+
+    iban1.value = fakeIban.substring(0,4);
+    iban2.value = fakeIban.substring(4,8);
+    iban3.value = fakeIban.substring(8,12);
+    iban4.value = fakeIban.substring(12,16);
+    iban5.value = fakeIban.substring(16,20);
+    iban6.value = fakeIban.substring(20,24);
+    iban7.value = fakeIban.substring(24,27);
+
+    // enter BIC
+    const bic = document.querySelector('#CDNIDBIC');
+    bic.value = fakeBIC;
+
+    // enter "Domiciliation"
+    const dom = document.querySelector("input[name='COMBAN']");
+    dom.value = fakeDom;
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector('#BCContinuer').click()}, 50);
+  }
+
+  // check webpage "Les personnes de votre foyer"
+  if (document.querySelector("label[for='drRessEnfOui']") != null) {
+    console.log(13);
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector('#BCContinuer').click()}, 50);
+  }
 }
 
 // ---------------------------
