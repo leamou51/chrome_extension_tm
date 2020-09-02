@@ -72,6 +72,8 @@ const urlThirdPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesse
 
 const urlFourthPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/hZDNDoIwEISfyHTLn3BEkVKrgBIicCGNAdMIxSDx-S0JMfEA7G2Tb2ZnFhUoQ4XkH_Hgg-gkb8a9sMo4wiRgCZDIO9tAU08H_3DF4IICcgXAzChg1FuBQbDDgBHm-ODSMGHGDnSItUm_AKzcv6HiH7H9vQ_UMT0vvFAVQV8DYAKWOqy1yFWL7SxgGiiVXd-qfyajV923z73ktXsfv4zyvhJSDII34l31k9cvLrCTqoy16OgSrAPB6NWmGQi6yduSfgHdskix/dl5/d5/L2dBISEvZ0FBIS9nQSEh'
 
+const urlFithPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/hZBhT8IwEIZ_jR9drwwQPg7mRp0MFQlsX0jdbqZxa0np0J9v64jBGKBpk_buuffuLcnJhuSSH8Q7N0JJXrt3Ptw-LWg8S5YQL8L5CNgq9CG6f6EQgAUyC8CZZQFXP5z1YzpOIImTcQQBS5dJfwI-PPWO9ReAK_3XJP-LjKJpBGw8CMP0mdkR_GsAHIFLHq65yKyLu7PAoE9WUunG_ufSaVW6-ZhKXgWF-2WSaRRSGMFrsUd91PodF5JHa5n2Fg9BTH2IaadhsMadVgWWrUYmS_zq1Kaq1VwaJJkP_7i5Kt0RlSh419roFh0mnIKbiWS05wKNMtjqLnJytxn-0yeyfrpspb2CV95OaVOj8db49nrac8_sNFqiOQj8vIGUGxuccFHXVtMrFdk1qw0Idps12zQdHOyeB9-6L_nt/dl5/d5/L2dBISEvZ0FBIS9nQSEh'
+
 // ---------------------------
 // AUTOCOMPLETE FORM FUNCTIONS
 // ---------------------------
@@ -235,7 +237,7 @@ function autoCompleteFormFourthPart() {
   }
 
   // check webpage "Etat civil - complément des données de naissance"
-  if (document.querySelector('#IDENTCOMMUNE') != null && document.querySelector("input[name='adresseParent']") == null && document.querySelector('#dfOccLog') == null) {
+  if (document.querySelector('#IDENTCOMMUNE') != null && document.querySelector("input[name='adresseParent']") == null && document.querySelector('#dfOccLog') == null && document.querySelector('#nomVoie') == null) {
     console.log(6);
     const zipCodeBirth = document.querySelector('#IDENTCOMMUNE');
     zipCodeBirth.value = `${userObj.birth_location.toUpperCase()} (${userObj.zip_code_location})`
@@ -323,6 +325,7 @@ function autoCompleteFormFourthPart() {
   // check webpage "Coordonnées bancaires"
   if (document.querySelector('#CTNIBAN1') != null) {
     console.log(12);
+    // /!\ by default (no data from API)
     const fakeIban = 'FR7630004000031234567890143';
     const fakeBIC = 'BNPAFRPPXXX';
     const fakeDom = 'PARIS'
@@ -359,8 +362,205 @@ function autoCompleteFormFourthPart() {
   if (document.querySelector("label[for='drRessEnfOui']") != null) {
     console.log(13);
     // click on "Continuer" button
-    setTimeout(function() { document.querySelector('#BCContinuer').click()}, 50);
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
   }
+
+  // check webpage "Déclaration des ressources 2018"
+  if (document.querySelector('#SalN2') != null) {
+    console.log(14);
+    // check checkbox "Revenus 2018"
+    // (only case treated: "Aucun revenu")
+    // /!\ by default (no data from API)
+    document.querySelector('#NulN2').click();
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Patrimoine immobilier"
+  if (document.querySelector('#patrimoineMobilierN') != null) {
+    console.log(15);
+    // check checkbox "Vous détenez un patrimoine mobilier oui/non"
+    // (only case treated: "non")
+    // /!\ by default (no data from API)
+    document.querySelector('#patrimoineMobilierN').click();
+
+    // check checkbox "Vous détenez un patrimoine immobilier (hors résidence principale ou bien à usage professionnel) oui/non"
+    // (only case treated: "non")
+    // /!\ by default (no data from API)
+    document.querySelector('#patrimoineImmoN').click();
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Colocation"
+  if (document.querySelector('#estColocataireNon') != null) {
+    console.log(16);
+    // check checkbox "Vous êtes colocataire oui/non"
+    // (only case treated: "non")
+    // /!\ by default (no data from API)
+    document.querySelector('#estColocataireNon').click();
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Type de bailleur"
+  if (document.querySelector('#particulier') != null) {
+    console.log(17);
+    // check checkbox "Le bailleur est..."
+    // (only case treated: "particulier")
+    // /!\ by default (no data from API)
+    document.querySelectorAll('#particulier')[0].click();
+
+    // check checkbox "Votre bailleur réside en France"
+    // (only case treated: "oui")
+    // /!\ by default (no data from API)
+    document.querySelector('#adresseFranceOui').click();
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Info bailleur"
+  if (document.querySelector('#libTypeVoie.zoneDeSaisie.ui-autocomplete-input') != null && document.querySelector('#lieuDit') == null) {
+    console.log(18);
+    // select "Type de voie"
+    // /!\ by default (no data from API)
+    // document.querySelector("select[name='typeVoiePropose']").value = "RUE";
+
+    console.log(1);
+    // enter landlord's information
+    // /!\ by default (no data from API)
+    const fakeLandlordLastName = 'DUPONT';
+    const fakeLandlordFirstName = 'MARTIN';
+    const fakeLandlordNum = '2';
+    const fakeLandlordStreetType = 'RUE';
+    const fakeLandlordStreetName = 'COLBERT';
+    const fakeLandlordCity = 'RETHEL';
+
+    document.querySelectorAll('.zoneDeSaisie')[0].value = fakeLandlordLastName;
+    document.querySelectorAll('.zoneDeSaisie')[1].value = fakeLandlordFirstName;
+    document.querySelector('#numeroVoie').value = fakeLandlordNum;
+    document.querySelector('#libTypeVoie').value = fakeLandlordStreetType;
+    document.querySelector('#nomVoie').value = fakeLandlordStreetName;
+    document.querySelector('#IDENTCOMMUNE').value = fakeLandlordCity;
+
+    // click on "Rechercher" button
+    setTimeout(function() { document.querySelector('.bouton2').click()}, 50);
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Info bailleur - détails"
+  if (document.querySelector('#libTypeVoie.zoneDeSaisie.ui-autocomplete-input') != null && document.querySelector('#lieuDit') != null) {
+    console.log(19);
+    // select "Type de voie" / "Type de num"
+    // /!\ by default (no data from API)
+    if (document.querySelector("select[name='typeVoiePropose']")) {
+      document.querySelector("select[name='typeVoiePropose']").value = "RUE";
+    }
+    if (document.querySelector("select[name='numeroVoie']")) {
+      document.querySelector("select[name='numeroVoie']").value = " ";
+    }
+
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Caractéristiques du logement"
+  if (document.querySelector('#surfaceLogement') != null ) {
+    console.log(20);
+    // enter "Surface du logement"
+    document.querySelector('#surfaceLogement').value = userObj.habitation.size;
+
+    // check checkbox "Logement meublé"
+    // (only case treated: "oui")
+    if (userObj.habitation.furnished == true) {
+      document.querySelector('#estUnLogementMeubleNon').click();
+    }
+
+    // check checkbox "Pièce unique sans WC"
+    // (only case treated: "non")
+    // /!\ by default (no data from API)
+    document.querySelector('#estUneChambreNon').click();
+
+    // check checkbox "Logement décent"
+    // (only case treated: "oui")
+    // /!\ by default (no data from API)
+    document.querySelector('#estDecentOui').click();
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Loyer"
+  if (document.querySelector('#montantLoyer') != null ) {
+    console.log(21);
+    var event = document.createEvent('Event');
+    event.initEvent('input', true, true);
+    // enter "Montant loyer"
+    document.querySelectorAll('#montantLoyer')[0].value = userObj.habitation.rent;
+    document.querySelectorAll('#montantLoyer')[1].value = '00'
+
+    // enter "Mois du premier loyer payé"
+    const firstMonth = document.querySelector('#moisPremierLoyer');
+    firstMonth.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/").substring(3);
+    firstMonth.dispatchEvent(event);
+
+    // enter the start date of the lease
+    const leaseDate = document.querySelector('#dateEffetBail');
+    leaseDate.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/");
+    leaseDate.dispatchEvent(event);
+
+    // select the lease's owner
+    document.querySelector('#titulaireBail').value = "V  "
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+  }
+
+  // check webpage "Double résidence pour stage"
+  if (document.querySelector('#fraisDoubleResidenceNon') != null) {
+    console.log(22);
+     // check checkbox "Loyer supplémentaire pour l'occupation d'un deuxième logement"
+    // (only case treated: "non")
+    // /!\ by default (no data from API)
+    document.querySelector('#fraisDoubleResidenceNon').click();
+
+    // click on "Continuer" button
+    setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
+
+  }
+}
+
+function autoCompleteFormFithPart() {
+  // check webpage "Info bailleur"
+  if (document.querySelector('#libTypeVoie.zoneDeSaisie.ui-autocomplete-input') != null) {
+    console.log(1);
+    // enter landlord's information
+    // /!\ by default (no data from API)
+    const fakeLandlordLastName = 'DUPONT';
+    const fakeLandlordFirstName = 'MARTIN';
+    const fakeLandlordNum = '2';
+    const fakeLandlordStreetType = 'RUE';
+    const fakeLandlordStreetName = 'COLBERT';
+    const fakeLandlordCity = 'RETHEL';
+
+    document.querySelectorAll('.zoneDeSaisie')[0].value = fakeLandlordLastName;
+    document.querySelectorAll('.zoneDeSaisie')[1].value = fakeLandlordFirstName;
+    document.querySelector('#numeroVoie').value = fakeLandlordNum;
+    document.querySelector('#libTypeVoie').value = fakeLandlordStreetType;
+    document.querySelector('#nomVoie').value = fakeLandlordStreetName;
+    document.querySelector('#IDENTCOMMUNE').value = fakeLandlordCity;
+
+    // click on "Rechercher" button
+    setTimeout(function() { document.querySelector('.bouton2').click()}, 50);
+  }
+
 }
 
 // ---------------------------
@@ -387,6 +587,11 @@ function actions() {
   if(window.location.href.includes(urlFourthPage)) {
     console.log('url4');
     autoCompleteFormFourthPart();
+  }
+
+  if(window.location.href.includes(urlFithPage)) {
+    console.log('url5');
+    autoCompleteFormFithPart();
   }
 }
 
