@@ -1,3 +1,19 @@
+// ---------------------------
+// DIALOG BOX
+// ---------------------------
+
+function dialogBox() {
+  chrome.runtime.sendMessage({type: "notification", options: {
+    type: "basic",
+    iconUrl: "./images/grandmother.png",
+    title: "Bravo Doudou !! 🎉",
+    message: " Ta demande est finalisée. N'oublie pas de valider cette tâche sur ton app 😉"
+}});
+};
+
+// ---------------------------
+// FETCH DATA FROM API
+// ---------------------------
 const apiUrl = 'http://localhost:3000//api/v1/users/4'
 let userObj = null
 
@@ -538,6 +554,12 @@ function autoCompleteFormFourthPart() {
     // click on "Continuer" button
     setTimeout(function() { document.querySelector("input[name='BCContinuer']").click()}, 50);
 
+  }
+
+  // check webpage "Récap"
+  if (document.querySelector('#idTituCompte')) {
+    console.log(23);
+    dialogBox();
   }
 }
 
