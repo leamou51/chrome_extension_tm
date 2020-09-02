@@ -14,9 +14,14 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.type == "notification")
       chrome.notifications.create('notification', request.options, function() { });
+    chrome.notifications.onButtonClicked.addListener(function() {
+      console.log('coucou')
+      window.open("https://www.tatamonique.live/tasks/50/subtasks");
+    })
 
     sendResponse();
 });
+
 
 // clear le state quand le user arrive sur le formulaire
 chrome.webNavigation.onCompleted.addListener(function() {

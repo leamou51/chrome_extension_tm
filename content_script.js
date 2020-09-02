@@ -7,7 +7,10 @@ function dialogBox() {
     type: "basic",
     iconUrl: "./images/grandmother.png",
     title: "Bravo Doudou !! 🎉",
-    message: " Ta demande est finalisée. N'oublie pas de valider cette tâche sur ton app 😉"
+    message: " Ta demande est finalisée. N'oublie pas de valider cette tâche sur ton app 😉",
+    buttons: [{
+            title: "Valider ma demande"
+        }]
 }});
 };
 
