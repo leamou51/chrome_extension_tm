@@ -16,7 +16,6 @@
     "alarms"
   ],
   "browser_action": {
-    // "default_popup": "popup.html",
     "default_icon": "images/grandmother.png"
   },
   "icons": {
@@ -25,12 +24,4 @@
     "48": "images/grandmother.png",
     "128": "images/grandmother.png"
    }
-  // , "content_scripts" :
-  // [
-  //   {
-  //       "matches": ["https://wwwd.caf.fr/*","http://wwwd.caf.fr/*"],
-  //       "all_frames": true,
-  //       "js": ["content_script.js"]
-  //   }
-  // ]
 }

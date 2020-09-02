@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/v1/users/4'
+const apiUrl = 'http://localhost:3000//api/v1/users/4'
 let userObj = null
 
 function fetchUserData () {
@@ -113,7 +113,8 @@ function autoCompleteFormThirdPart() {
 
   // enter the start date of the lease
   const leaseDate = document.querySelector('#DTEMM');
-  leaseDate.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/");
+  // leaseDate.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/");
+  leaseDate.value = '04/09/2020'
   var event = document.createEvent('Event');
   event.initEvent('input', true, true);
   leaseDate.dispatchEvent(event);
@@ -503,17 +504,20 @@ function autoCompleteFormFourthPart() {
     var event = document.createEvent('Event');
     event.initEvent('input', true, true);
     // enter "Montant loyer"
-    document.querySelectorAll('#montantLoyer')[0].value = userObj.habitation.rent;
+    // document.querySelectorAll('#montantLoyer')[0].value = userObj.habitation.rent;
+    document.querySelectorAll('#montantLoyer')[0].value = '880';
     document.querySelectorAll('#montantLoyer')[1].value = '00'
 
     // enter "Mois du premier loyer payé"
     const firstMonth = document.querySelector('#moisPremierLoyer');
-    firstMonth.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/").substring(3);
+    // firstMonth.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/").substring(3);
+    firstMonth.value = '09/2020'
     firstMonth.dispatchEvent(event);
 
     // enter the start date of the lease
     const leaseDate = document.querySelector('#dateEffetBail');
-    leaseDate.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/");
+    // leaseDate.value = userObj.habitation.lease_start_date.split("-").reverse().join("-").replace(/-/g,"/");
+    leaseDate.value = '04/09/2020'
     leaseDate.dispatchEvent(event);
 
     // select the lease's owner
