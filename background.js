@@ -1,4 +1,22 @@
+// NOTIF QUAND FORMULAIRE CAF REMPLI -> retour sur app Tata Monique
+// -----------
+// avec popup
+// -----------
+// chrome.webNavigation.onCompleted.addListener(function() {
+//   console.log('create dialog box');
 
+//     window.open('https://www.tatamonique.live/tasks/22/subtasks','popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+
+// }, {url: [{urlEquals : 'https://www.google.com/'}]});
+// -----------
+//avec notif
+// -----------
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.type == "notification")
+      chrome.notifications.create('notification', request.options, function() { });
+
+    sendResponse();
+});
 
 // clear le state quand le user arrive sur le formulaire
 chrome.webNavigation.onCompleted.addListener(function() {
@@ -8,6 +26,7 @@ chrome.webNavigation.onCompleted.addListener(function() {
   chrome.alarms.create("", {periodInMinutes: 0.1});
 
   chrome.notifications.clear(tataMoniqueNotification);
+  chrome.notifications.clear('notification');
 
   chrome.notifications.create(tataMoniqueNotification, {
     "type": "basic",
@@ -49,7 +68,6 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   })
 
 });
-
 
 // à chaque fois qu'une nouvelle page se charge, run content script si state = 1
 chrome.webNavigation.onCompleted.addListener(function() {
