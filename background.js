@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       chrome.notifications.create('notification', request.options, function() { });
     chrome.notifications.onButtonClicked.addListener(function() {
       console.log('coucou')
-      window.open("https://www.tatamonique.live/tasks/50/subtasks");
+      window.open("https://www.tatamonique.live/tasks/57/subtasks");
     })
 
     sendResponse();
