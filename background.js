@@ -14,9 +14,8 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.type == "notification")
       chrome.notifications.create('notification', request.options, function() { });
-    chrome.notifications.onButtonClicked.addListener(function() {
-      console.log('coucou')
-      window.open("https://www.tatamonique.live/tasks/57/subtasks");
+      chrome.notifications.onClicked.addListener(function() {
+        chrome.tabs.create({url: "https://www.tatamonique.live/tasks"});
     })
 
     sendResponse();
@@ -28,7 +27,7 @@ chrome.webNavigation.onCompleted.addListener(function() {
 
   var tataMoniqueNotification = "tata-monique-notification"
 
-  chrome.alarms.create("", {periodInMinutes: 0.1});
+  // chrome.alarms.create("", {periodInMinutes: 0.1});
 
   chrome.notifications.clear(tataMoniqueNotification);
   chrome.notifications.clear('notification');

@@ -7,28 +7,50 @@ function dialogBox() {
     type: "basic",
     iconUrl: "./images/grandmother.png",
     title: "Bravo Doudou !! 🎉",
-    message: " Ta demande est finalisée. N'oublie pas de valider cette tâche sur ton app 😉",
-    buttons: [{
-            title: "Valider ma demande"
-        }]
-}});
+    message: " Ta demande est finalisée et ta tâche est complétée à 100% ! 😉"
+  }});
 };
 
 // ---------------------------
-// FETCH DATA FROM API
+// FETCH USER DATA FROM API
 // ---------------------------
-const apiUrl = 'http://localhost:3000//api/v1/users/4'
+// const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/14'
+const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/18'
 let userObj = null
 
 function fetchUserData () {
-  fetch (apiUrl)
+  fetch (apiUserUrl)
     .then(res => res.json() )
     .then(data => {
+      console.log(data);
       userObj = data;
+      console.log(userObj.habitation);
     })
 }
 
 fetchUserData();
+
+// ---------------------------
+// FETCH SUBTASK DATA FROM API
+// ---------------------------
+const apiSubtaskUrl = 'https://www.tatamonique.live/api/v1/users/18/usersubtasks/174'
+
+function fetchSubtaskData (completed) {
+  fetch(apiSubtaskUrl, {
+    method: 'PATCH',
+    body: JSON.stringify(completed),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      "X-CSRF-Token": "Eeb9LkHLUzM1gixBtRM9",
+      "Accept": "application/json"
+      }
+    })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+  });
+};
+
 
 // ---------------------------
 // TEST DATA
@@ -83,11 +105,7 @@ const urlFirstPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesse
 
 const urlSecondPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDfHIv0j0078visPrNZe8NP2gIxQ!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
 
-
-
 const urlThirdPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/lZDRjoIwFES_xQ8wnQqoPKJIrVVxZYmWF9MomkYpBo3fb0nIJj4I2ft2kzNzZy7JyJ5kRr30RT11adSt3rPhYRNTNhcJWByuxuBp6CCabSkCWEBaAF_GArV-OHcZ9QUEE36EgK8T4U7gYDNo9C1Ax_0dyT6RcTSNwH0vDNc_3EZwugA0QFuHrhbSthh9BTyXpKasCvvPpPY6V8V1atQ5ONZfJrLKtdFPrW76kVeN119ciKWtTAfxImDUAaP_8bLAsTzl9_JB5MgDfHIv0j0078visPrNZe8NP2gIxQ!!/dl5/d5/L2dBISEvZ0FBIS9nQSEh/'
-
-
 
 const urlFourthPage = 'https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement/!ut/p/a1/hZDNDoIwEISfyHTLn3BEkVKrgBIicCGNAdMIxSDx-S0JMfEA7G2Tb2ZnFhUoQ4XkH_Hgg-gkb8a9sMo4wiRgCZDIO9tAU08H_3DF4IICcgXAzChg1FuBQbDDgBHm-ODSMGHGDnSItUm_AKzcv6HiH7H9vQ_UMT0vvFAVQV8DYAKWOqy1yFWL7SxgGiiVXd-qfyajV923z73ktXsfv4zyvhJSDII34l31k9cvLrCTqoy16OgSrAPB6NWmGQi6yduSfgHdskix/dl5/d5/L2dBISEvZ0FBIS9nQSEh'
 
@@ -562,6 +580,7 @@ function autoCompleteFormFourthPart() {
   // check webpage "Récap"
   if (document.querySelector('#idTituCompte')) {
     console.log(23);
+    fetchSubtaskData({done: true});
     dialogBox();
   }
 }
@@ -624,5 +643,5 @@ function actions() {
   }
 }
 
-setTimeout(function() { actions()}, 50);
+setTimeout(function() { actions()}, 150);
 
