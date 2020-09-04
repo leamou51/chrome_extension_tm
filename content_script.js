@@ -15,7 +15,7 @@ function dialogBox() {
 // FETCH USER DATA FROM API
 // ---------------------------
 // const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/14'
-const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/18'
+const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/22'
 let userObj = null
 
 function fetchUserData () {
@@ -33,7 +33,7 @@ fetchUserData();
 // ---------------------------
 // FETCH SUBTASK DATA FROM API
 // ---------------------------
-const apiSubtaskUrl = 'https://www.tatamonique.live/api/v1/users/18/usersubtasks/174'
+const apiSubtaskUrl = 'https://www.tatamonique.live/api/v1/users/22/usersubtasks/204'
 
 function fetchSubtaskData (completed) {
   fetch(apiSubtaskUrl, {
