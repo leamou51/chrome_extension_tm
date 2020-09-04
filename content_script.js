@@ -15,7 +15,7 @@ function dialogBox() {
 // FETCH USER DATA FROM API
 // ---------------------------
 // const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/14'
-const apiUserUrl = 'https://www.tatamonique.live//api/v1/users/26'
+const apiUserUrl = 'https://www.tatamonique.live/api/v1/users/26'
 let userObj = null
 
 function fetchUserData () {
